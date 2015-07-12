@@ -11,13 +11,12 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use MyApp\Controller\CrudController;
 
-class IndexController extends AbstractActionController
+class IndexController extends CrudController
 {
     public function indexAction()
     {
-        $view = new ViewModel();
-        $view->setTemplate('ng-view.phtml');
-        return $view;
+        return $this->returnNgView();
     }
 }

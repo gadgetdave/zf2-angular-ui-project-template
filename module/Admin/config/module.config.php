@@ -35,7 +35,7 @@ return array(
                     ),
                 ),
                 'may_terminate' => true,
-                'child_routes' => array(
+                /* 'child_routes' => array(
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -48,8 +48,23 @@ return array(
                             ),
                         ),
                     ),
-                ),
+                ), */
             ),
+            
+            'admin_user' => [
+                 'type'=> 'segment',
+                 'options' => [
+                     'route' => '/admin/user[/][:action[/]][:userId[/]]',
+                     'constraints' => [
+                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'userId' => '[0-9]+',
+                     ],
+                     'defaults' => [
+                         'controller' => 'Admin\Controller\User',
+                         'action' => 'index',
+                     ],
+                 ],
+             ],
         ),
     ),
     'service_manager' => array(
@@ -73,7 +88,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Admin\Controller\Index' => 'Admin\Controller\IndexController'
+            'Admin\Controller\Index' => 'Admin\Controller\IndexController',
+            'Admin\Controller\User' => 'Admin\Controller\UserController'
         ),
     ),
     'view_manager' => array(
@@ -82,6 +98,9 @@ return array(
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
+        'strategies' => array(
+            'ViewJsonStrategy',
+        ),
         /* 'template_map' => array(
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
@@ -145,5 +164,18 @@ return array(
             ),
         ),
     ), */
+    'doctrine' => array(
+      'driver' => array(
+        'application_entities' => array(
+          'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+          'cache' => 'array',
+          'paths' => array(__DIR__ . '/../src/Admin/Entity')
+        ),
+    
+        'orm_default' => array(
+          'drivers' => array(
+            'Admin\Entity' => 'application_entities'
+          )
+    )))
     
 );

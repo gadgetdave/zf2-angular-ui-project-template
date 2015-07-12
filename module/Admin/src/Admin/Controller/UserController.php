@@ -11,20 +11,17 @@ namespace Admin\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use MyApp\Controller\CrudController;
 
-class UserController extends AbstractActionController
+class UserController extends CrudController
 {
-    public function indexAction()
+    public function __construct()
     {
-        $view = new ViewModel();
-        $view->setTemplate('ng-view.phtml');
-        return $view;
-    }
-    
-    public function editAction()
-    {
-        $view = new ViewModel();
-        $view->setTemplate('ng-view.phtml');
-        return $view;
+        $this->entityClass = 'Admin\Entity\User';
+        $this->viewConfig = [
+            'title' => 'Users',
+            'getItemsUrl' => '/admin/user/search',
+            'createUrl' => 'create',
+        ];
     }
 }

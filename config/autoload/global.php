@@ -32,6 +32,13 @@ return array(
                 '@base_css',
                 '@admin_css'
             ),
+
+            'admin_user' => array(
+                '@base_js',
+                '@admin_js',
+                '@base_css',
+                '@admin_css'
+            ),
         ),
 
         'modules' => array(
@@ -59,6 +66,7 @@ return array(
                     
                     'base_js' => array(
                         'assets' => array(
+                            'js/MyApp.js',
                             'js/html5shiv.min.js',
                         )
                     ),
@@ -103,6 +111,7 @@ return array(
                     'admin_js' => array(
                         'assets' => array(
                             'js/app.js',
+                            'js/controllers/*.js'
                         ),
                         'filters' => array(
                             '?JSMinFilter' => array(

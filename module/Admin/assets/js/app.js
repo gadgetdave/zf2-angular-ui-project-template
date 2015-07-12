@@ -6,17 +6,17 @@ angular.module(
     [
         'ui.bootstrap', 
         'ui.router',
+        'ui.grid',
         'ngTable'
     ]
-).config(function ($stateProvider, $urlRouterProvider) {
+);
 
-    $urlRouterProvider.otherwise("/index");
-    
-    $stateProvider.state(
-        "index",
-        {
-            url: "/index",
-            templateUrl: "/assets/views/admin.index.html"
-        }
-    );
-});
+angular.module('myApp')
+    .controller(
+        "itemController",
+        MyApp.itemControllerMethod
+    )
+    .service(
+        "itemService",
+        MyApp.itemService
+);

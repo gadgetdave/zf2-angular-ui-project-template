@@ -13,12 +13,18 @@ trait ControllerTrait
      *
      * @param ViewModel $view
      */
-    protected function returnNgView()
+    protected function returnNgView($variables = [])
     {
-        $view = new ViewModel([
+        if (empty($variables)) {
+            $variables = [];
+        }
+        
+        $variables += [
             'appName' => 'myApp',
-            'script' => 'MyApp.setControllerConfig(' . Json::encode($this->viewConfig) . ');'
-        ]);
+            'script' => 'var VIEW_DATA = ' . Json::encode($this->viewConfig) . ';'
+        ];
+        
+        $view = new ViewModel($variables);
         $view->setTemplate('ng-view.phtml');
         return $view;
     }

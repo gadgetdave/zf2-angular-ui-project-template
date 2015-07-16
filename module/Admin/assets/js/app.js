@@ -1,7 +1,6 @@
 'use strict';
 
-// Declare app level module which depends on filters, and services
-angular.module(
+var app = angular.module(
     'myApp',
     [
         'ui.bootstrap', 
@@ -9,14 +8,22 @@ angular.module(
         'ui.grid',
         'ngTable'
     ]
-);
+)
+.config(function ($stateProvider, $urlRouterProvider) {
 
-angular.module('myApp')
-    .controller(
-        "itemController",
-        MyApp.itemControllerMethod
-    )
-    .service(
-        "itemService",
-        MyApp.itemService
-);
+    var otherwiseUrl = VIEW_DATA.state.otherwiseUrl || "/",
+        stateConfig = VIEW_DATA.state.config;
+    
+    $urlRouterProvider.otherwise(otherwiseUrl);
+    
+    // here we are adding the routes that we have 
+    // passed from the back end in VIEW_DATA
+    for (var prop in stateConfig) {
+        if (stateConfig.hasOwnProperty(prop)) {
+            $stateProvider.state(
+                prop,
+                stateConfig[prop]
+            );
+        }
+    }
+});

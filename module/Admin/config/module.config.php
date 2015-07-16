@@ -51,16 +51,16 @@ return array(
                 ), */
             ),
             
-            'admin_user' => [
+            'admin_example' => [
                  'type'=> 'segment',
                  'options' => [
-                     'route' => '/admin/user[/][:action[/]][:userId[/]]',
+                     'route' => '/admin/example[/][:action[/]][:exampleId[/]]',
                      'constraints' => [
                          'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                          'userId' => '[0-9]+',
                      ],
                      'defaults' => [
-                         'controller' => 'Admin\Controller\User',
+                         'controller' => 'Admin\Controller\Example',
                          'action' => 'index',
                      ],
                  ],
@@ -89,7 +89,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
-            'Admin\Controller\User' => 'Admin\Controller\UserController'
+            'Admin\Controller\Example' => 'Admin\Controller\ExampleController'
         ),
     ),
     'view_manager' => array(

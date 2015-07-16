@@ -13,15 +13,24 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use MyApp\Controller\CrudController;
 
-class UserController extends CrudController
+class ExampleController extends CrudController
 {
     public function __construct()
     {
-        $this->entityClass = 'Admin\Entity\User';
+        $this->entityClass = 'Admin\Entity\Example';
         $this->viewConfig = [
-            'title' => 'Users',
-            'getItemsUrl' => '/admin/user/search',
+            'title' => 'Example',
+            'getItemsUrl' => '/admin/example/search',
             'createUrl' => 'create',
+            'state' => [
+                'otherwiseUrl' => '/',
+                'config' => [
+                    'index' => [
+                        'url' => "/",
+                        'templateUrl' => '/assets/views/grid.html'
+                    ]
+                ]
+            ]
         ];
     }
 }

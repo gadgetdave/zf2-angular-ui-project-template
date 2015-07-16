@@ -33,7 +33,7 @@ return array(
                 '@admin_css'
             ),
 
-            'admin_user' => array(
+            'admin_example' => array(
                 '@base_js',
                 '@admin_js',
                 '@base_css',
@@ -111,6 +111,7 @@ return array(
                     'admin_js' => array(
                         'assets' => array(
                             'js/app.js',
+                            'js/services.js',
                             'js/controllers/*.js'
                         ),
                         'filters' => array(

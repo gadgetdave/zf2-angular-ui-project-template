@@ -9,12 +9,27 @@
 
 namespace Admin\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use MyApp\Controller\CrudController;
+use MyApp\Controller\Controller;
 
-class IndexController extends CrudController
+class IndexController extends Controller
 {
+    public function __construct()
+    {
+        $this->viewConfig = [
+            'title' => 'Admin Dashboard',
+            'state' => [
+                'otherwiseUrl' => '/',
+                'config' => [
+                    'index' => [
+                        'url' => "/",
+                        'templateUrl' => '/assets/views/index.html'
+                    ]
+                ]
+            ]
+        ];
+    }
+    
     public function indexAction()
     {
         return $this->returnNgView();

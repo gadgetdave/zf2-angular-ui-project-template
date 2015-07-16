@@ -85,6 +85,17 @@ abstract class CrudController extends AbstractActionController
      */
     public function indexAction()
     {
+        $repository = $this->getEntityManager()->getRepository(
+            $this->entityClass
+        );
+        
+        $items = [];
+        foreach ($repository->findAll() as $row) {
+            $items[] = $row->toArray();
+        }
+
+        $this->viewConfig['items'] = $items;
+        
         return $this->returnNgView();
     }
     
@@ -97,7 +108,6 @@ abstract class CrudController extends AbstractActionController
         $repository = $this->getEntityManager()->getRepository(
             $this->entityClass
         );
-        
         
         $items = [];
         foreach ($repository->findAll() as $row) {

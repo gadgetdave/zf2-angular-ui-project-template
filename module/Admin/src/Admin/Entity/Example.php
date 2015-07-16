@@ -16,11 +16,11 @@ use Doctrine\ORM\Mapping as ORM;
  * An example of how to implement a role aware user entity.
  *
  * @ORM\Entity
- * @ORM\Table(name="users")
+ * @ORM\Table(name="example")
  *
  * @author Tom Oram <tom@scl.co.uk>
  */
-class User
+class Example
 {
     /**
      * @var int
@@ -28,19 +28,19 @@ class User
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $userId = null;
+    protected $exampleId = null;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $username = null;
+    protected $name = null;
 
     public function toArray()
     {
         return array(
-            'userId' => $this->getUserId(),
-            'username' => $this->getUsername(),
+            'exampleId' => $this->getExampleId(),
+            'name' => $this->getName(),
         );
     }
 
@@ -49,9 +49,9 @@ class User
      *
      * @return int
      */
-    public function getUserId()
+    public function getExampleId()
     {
-        return $this->userId;
+        return $this->exampleId;
     }
 
     /**
@@ -61,9 +61,9 @@ class User
      *
      * @return void
      */
-    public function setUserId($userId)
+    public function setExampleId($exampleId)
     {
-        $this->userId = (int) $userId;
+        $this->exampleId = (int) $exampleId;
         return $this;
     }
 
@@ -72,21 +72,21 @@ class User
      *
      * @return string
      */
-    public function getUsername()
+    public function getName()
     {
-        return $this->username;
+        return $this->name;
     }
 
     /**
-     * Set username.
+     * Set name.
      *
-     * @param string $username
+     * @param string $name
      *
      * @return void
      */
-    public function setUsername($username)
+    public function setName($name)
     {
-        $this->username = $username;
+        $this->name = $name;
         return $this;
     }
 }

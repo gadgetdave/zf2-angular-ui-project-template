@@ -1,4 +1,6 @@
 'use strict';
+
+
 var MyApp = (function () {
     var controllerConfig;
     
@@ -7,7 +9,35 @@ var MyApp = (function () {
     Controller.prototype.config = {};
     Controller.prototype.model = '';
     Controller.prototype.getItemsUrl = '';
+    Controller.prototype.items = [];
     Controller.prototype.title = '';
+    Controller.prototype.addStates = function (states) {
+        angular.forEach(data, function(value, key) {
+
+            // here we ask if there is a state with the same name
+            var getExistingState = $state.get(value.name)
+
+            // no need to continue, there is state (e.g. login) already
+            if(getExistingState !== null){
+              return; 
+            }
+
+            var state = {
+                  "url": value.url,
+                  "parent": value.parent,
+                  "abstract": value.abstract,
+                  "views": {}
+            };
+
+            angular.forEach(value.views, function(view) {
+                state.views[view.name] = {
+                    templateUrl: view.templateUrl,
+                };
+            });
+
+            $stateProviderRef.state(value.name, state);
+        });
+    };
     Controller.prototype.populateVariables = function (variables) {
         for (var prop in variables) {
             if (variables.hasOwnProperty(prop)) {
@@ -34,7 +64,7 @@ var MyApp = (function () {
         },
         
         // I control the main demo.
-        itemControllerMethod: function( $scope, itemService ) {
+        gridController: function( $scope, gridService ) {
             
             // I contain the list of friends to be rendered.
             $scope.items = [];
@@ -51,7 +81,7 @@ var MyApp = (function () {
             function loadRemoteData() {
 
                 // The friendService returns a promise.
-                itemService.getItems()
+                gridService.getItems()
                     .then(
                         function( items ) {
                             applyRemoteData( items );
@@ -61,7 +91,7 @@ var MyApp = (function () {
             }
         },
         
-        itemService: function( $http, $q ) {
+        gridService: function( $http, $q ) {
 
             // Return public API.
             return({
@@ -117,3 +147,4 @@ var MyApp = (function () {
         }
     };
 }());
+

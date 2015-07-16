@@ -32,11 +32,13 @@
     <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
     <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
     <?php
-        $this->headLink()->prependStylesheet($this->basePath('bower_components/angular-ui-grid/ui-grid.css'));
+        $this->headLink()->prependStylesheet($this->basePath('bower_components/angular-ui-grid/ui-grid.css'))
+                         ->prependStylesheet($this->basePath('bower_components/angular-loading-bar/src/loading-bar.css'));
         
         echo $this->plugin('HeadLink');
 
         $this->headScript()
+            ->prependFile($this->basePath('bower_components/angular-loading-bar/src/loading-bar.js'))
             ->prependFile($this->basePath('bower_components/angular-ui-grid/ui-grid.js'))
             ->prependFile($this->basePath('bower_components/ng-table/dist/ng-table.js'))
             ->prependFile($this->basePath('bower_components/angular-ui-router/release/angular-ui-router.js'))

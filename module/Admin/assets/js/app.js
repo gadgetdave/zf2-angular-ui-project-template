@@ -6,7 +6,8 @@ var app = angular.module(
         'ui.bootstrap', 
         'ui.router',
         'ui.grid',
-        'ngTable'
+        'ngTable',
+        'angular-loading-bar'
     ]
 )
 .config(function ($stateProvider, $urlRouterProvider) {

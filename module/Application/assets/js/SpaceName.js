@@ -1,16 +1,42 @@
 /**
- * SpaceName namspace for framework agnostic 'classes' {Object}'s and
+ * SpaceName namspace for front-end framework agnostic 'classes' {Object}'s and
  * methods
+ * - agnostic (but writtern for Angular)
  * 
  * @link https://github.com/gadgetdave/zf2-angular-ui-project-template
  * @copyright LOL
  * @license LOL
  */
 var SpaceName = (function () {
+    var Model,
+        ControllerService,
+        CrusControllerService,
+        addObjectProperties,
+        crudControllerServiceMethods;
+
+    /**
+     * Utility function for 'merging' object with
+     * passed object
+     * 
+     * @param {Object} object
+     * @param {Object} properties
+     * 
+     * @return {Object} passed object
+     */
+    addObjectProperties = function (object, properties) {
+        // for the given object lets add the properties to the CrudController prototype
+        // this is a bit cleaner than multiple lines of single property assignment
+        for (var prop in properties) {
+            object[prop] = properties[prop];
+        }
+        
+        return object;
+    };
+    
     /**
      * Model 'class' for use with CrudControllerService
      */
-    var Model = function () {}
+    Model = function () {}
     Model.prototype.isValid = function () {
         return true;
     };
@@ -19,10 +45,14 @@ var SpaceName = (function () {
      * ControllerService 'class' for use with back end controllers that don't
      * require crud functionality
      */
-    var ControllerService = function () {
+    ControllerService = function () {
         this.viewConfig = {};
         this.title = '';
     };
+    
+    /**
+     * CrontrollerService prototype {Object}
+     */
     ControllerService.prototype = {
         /**
          * init method - this is used to initialise
@@ -74,7 +104,7 @@ var SpaceName = (function () {
         }
     };
 
-    var CrudControllerService = function () {
+    CrudControllerService = function () {
         // call the super constructor
         ControllerService.call(this);
 
@@ -85,7 +115,8 @@ var SpaceName = (function () {
 
     // inherit from ControllerService
     CrudControllerService.prototype = Object.create(ControllerService.prototype);
-    var methodsToAdd = {
+
+    CrudControllerService.prototype = addObjectProperties(CrudControllerService.prototype, {
         /**
          * getter for internal property
          * 
@@ -128,19 +159,16 @@ var SpaceName = (function () {
             
             return this.items;
         }
-    }
-    // for the given object lets add the properties to the CrudController prototype
-    // this is a bit cleaner than multiple lines of single property assignment
-    for (var prop in methodsToAdd) {
-        CrudControllerService.prototype[prop] = methodsToAdd[prop];
-    }
+    });
+    
     // add service to angular app
-
     return {
         Model : Model,
         
         ConttrollerService : ControllerService,
         
-        CrudControllerService : CrudControllerService
+        CrudControllerService : CrudControllerService,
+        
+        addObjectProperties : addObjectProperties
     };
-} ());
+}());

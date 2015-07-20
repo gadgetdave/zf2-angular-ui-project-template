@@ -21,7 +21,8 @@ app
         
         // update the scope properties for the ngView
         // from the CrudControllerService
-        $scope.items = CrudControllerService.getItems();
+        $scope.gridOptions = CrudControllerService.get('gridOptions') || {};
+        $scope.gridOptions.data = CrudControllerService.getItems();
         $scope.title = CrudControllerService.getTitle();
     }
 );

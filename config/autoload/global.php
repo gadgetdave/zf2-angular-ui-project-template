@@ -67,7 +67,7 @@ return array(
                     'base_js' => array(
                         'assets' => array(
                             'js/SpaceName.js',
-                            'js/MyApp.js',
+//                             'js/MyApp.js',
                             'js/html5shiv.min.js',
                         )
                     ),

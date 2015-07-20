@@ -13,17 +13,17 @@ var app = angular.module(
 .config(function ($stateProvider, $urlRouterProvider) {
 
     var otherwiseUrl = VIEW_DATA.state.otherwiseUrl || "/",
-        stateConfig = VIEW_DATA.state.config;
+        stateRoutes = VIEW_DATA.state.routes;
     
     $urlRouterProvider.otherwise(otherwiseUrl);
     
     // here we are adding the routes that we have 
     // passed from the back end in VIEW_DATA
-    for (var prop in stateConfig) {
-        if (stateConfig.hasOwnProperty(prop)) {
+    for (var prop in stateRoutes) {
+        if (stateRoutes.hasOwnProperty(prop)) {
             $stateProvider.state(
                 prop,
-                stateConfig[prop]
+                stateRoutes[prop]
             );
         }
     }
@@ -55,7 +55,8 @@ app
         
         // update the scope properties for the ngView
         // from the CrudControllerService
-        $scope.items = CrudControllerService.getItems();
+        $scope.gridOptions = CrudControllerService.get('gridOptions') || {};
+        $scope.gridOptions.data = CrudControllerService.getItems();
         $scope.title = CrudControllerService.getTitle();
     }
 );

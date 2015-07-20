@@ -101,6 +101,18 @@ var SpaceName = (function () {
          */
         getTitle : function () {
             return this.title;
+        },
+        
+        /**
+         * @param {String} property
+         * @return multitype
+         */
+        get : function (property) {
+            if (typeof property !== 'string') {
+                return;
+            }
+            
+            return this[property];
         }
     };
 
@@ -108,6 +120,7 @@ var SpaceName = (function () {
         // call the super constructor
         ControllerService.call(this);
 
+        this.gridOptions;
         this.model = new Model();
         this.getItemsUrl = '';
         this.items;

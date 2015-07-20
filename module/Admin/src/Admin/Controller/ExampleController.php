@@ -19,17 +19,27 @@ class ExampleController extends CrudController
     {
         $this->entityClass = 'Admin\Entity\Example';
         $this->viewConfig = [
-            'title' => 'Example',
-            'getItemsUrl' => '/admin/example/search',
-            'createUrl' => 'create',
-            'state' => [
-                'otherwiseUrl' => '/',
-                'config' => [
+            CrudController::VIEW_CONFIG_TITLE => 'Example',
+            
+            CrudController::VIEW_CONFIG_GET_ITEMS_URL => '/admin/example/search',
+            
+            CrudController::VIEW_CONFIG_CREATE_URL => 'create',
+            
+            CrudController::VIEW_CONFIG_STATE => [
+                CrudController::VIEW_CONFIG_STATE_OTHERWISE_URL => '/',
+                CrudController::VIEW_CONFIG_STATE_ROUTES => [
                     'index' => [
                         'url' => "/",
                         'templateUrl' => '/assets/views/grid.html'
                     ]
                 ]
+            ],
+            
+            CrudController::VIEW_CONFIG_GRID_OPTIONS => [
+                'columnDefs' => [
+                    ['field' => 'exampleId'],
+                    ['field' => 'name', 'headerCellClass' => 'blue'],
+                ],
             ]
         ];
     }

@@ -129,7 +129,7 @@ var SpaceName = (function () {
     // inherit from ControllerService
     CrudControllerService.prototype = Object.create(ControllerService.prototype);
 
-    CrudControllerService.prototype = addObjectProperties(CrudControllerService.prototype, {
+    CrudControllerService.prototype = angular.extend(CrudControllerService.prototype, {
         /**
          * getter for internal property
          * 

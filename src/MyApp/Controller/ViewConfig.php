@@ -8,15 +8,16 @@ class ViewConfig
     const CREATE_URL = 'createUrl';
 
     const STATE = 'state';
-    const OTHERWISE_URL = 'otherwiseUrl';
-    const ROUTES = 'routes';
-    const URL = 'url';
-    const TEMPLATE_URL = 'templateUrl';
+    const STATE_OTHERWISE_URL = 'otherwiseUrl';
+    const STATE_ROUTES = 'routes';
+    const STATE_ROUTES_URL = 'url';
+    const STATE_ROUTES_TEMPLATE_URL = 'templateUrl';
     
     const ITEMS = 'items';
     
     const GRID_OPTIONS = 'gridOptions';
-    const COLUMN_DEFS = 'columnDefs';
-    const FIELD = 'field';
-    const HEADER_CELL_CLASS = 'headerCellClass';
+    const GRID_OPTIONS_COLUMN_DEFS = 'columnDefs';
+    const GRID_OPTIONS_FIELD = 'field';
+    const GRID_OPTIONS_NAME = 'name';
+    const GRID_OPTIONS_HEADER_CELL_CLASS = 'headerCellClass';
 }

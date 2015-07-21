@@ -94,7 +94,7 @@ abstract class CrudController extends AbstractActionController
             $items[] = $row->toArray();
         }
 
-        $this->viewConfig[self::VIEW_CONFIG_ITEMS] = $items;
+        $this->viewConfig[ViewConfig::ITEMS] = $items;
         
         return $this->returnNgView();
     }

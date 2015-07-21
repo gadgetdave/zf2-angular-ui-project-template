@@ -12,6 +12,7 @@ namespace Admin\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use MyApp\Controller\CrudController;
+use MyApp\Controller\ViewConfig;
 
 class ExampleController extends CrudController
 {
@@ -33,20 +34,29 @@ class ExampleController extends CrudController
                         ViewConfig::STATE_ROUTES_URL          => "/create",
                         ViewConfig::STATE_ROUTES_TEMPLATE_URL => 'create'
                     ],
+                    'edit' => [
+                        ViewConfig::STATE_ROUTES_URL          => "/edit",
+                        ViewConfig::STATE_ROUTES_TEMPLATE_URL => 'create'
+                    ],
                 ]
             ],
             
             ViewConfig::GRID_OPTIONS => [
                 ViewConfig::GRID_OPTIONS_COLUMN_DEFS => [
                     [
+                        ViewConfig::GRID_OPTIONS_NAME => 'ID',
                         ViewConfig::GRID_OPTIONS_FIELD => 'exampleId'
                     ],
                     [
                         ViewConfig::GRID_OPTIONS_FIELD             => 'name',
                         ViewConfig::GRID_OPTIONS_HEADER_CELL_CLASS => 'blue'
                     ],
+                    [
+                        ViewConfig::GRID_OPTIONS_FIELD             => 'actionLinks',
+                        'cellTemplate' => '<a href="#/edit">edit</a>'
+                    ],
                 ],
-            ]
+            ],
         ];
     }
 }

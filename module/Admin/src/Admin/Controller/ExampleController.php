@@ -19,26 +19,32 @@ class ExampleController extends CrudController
     {
         $this->entityClass = 'Admin\Entity\Example';
         $this->viewConfig = [
-            CrudController::VIEW_CONFIG_TITLE => 'Example',
-            
-            CrudController::VIEW_CONFIG_GET_ITEMS_URL => '/admin/example/search',
-            
-            CrudController::VIEW_CONFIG_CREATE_URL => 'create',
-            
-            CrudController::VIEW_CONFIG_STATE => [
-                CrudController::VIEW_CONFIG_STATE_OTHERWISE_URL => '/',
-                CrudController::VIEW_CONFIG_STATE_ROUTES => [
+            ViewConfig::TITLE         => 'Example',
+            ViewConfig::GET_ITEMS_URL => '/admin/example/search',
+            ViewConfig::CREATE_URL    => 'create',
+            ViewConfig::STATE         => [
+                ViewConfig::STATE_OTHERWISE_URL => '/',
+                ViewConfig::STATE_ROUTES        => [
                     'index' => [
-                        'url' => "/",
-                        'templateUrl' => '/assets/views/grid.html'
-                    ]
+                        ViewConfig::STATE_ROUTES_URL          => "/",
+                        ViewConfig::STATE_ROUTES_TEMPLATE_URL => '/assets/views/grid.html'
+                    ],
+                    'create' => [
+                        ViewConfig::STATE_ROUTES_URL          => "/create",
+                        ViewConfig::STATE_ROUTES_TEMPLATE_URL => 'create'
+                    ],
                 ]
             ],
             
-            CrudController::VIEW_CONFIG_GRID_OPTIONS => [
-                'columnDefs' => [
-                    ['field' => 'exampleId'],
-                    ['field' => 'name', 'headerCellClass' => 'blue'],
+            ViewConfig::GRID_OPTIONS => [
+                ViewConfig::GRID_OPTIONS_COLUMN_DEFS => [
+                    [
+                        ViewConfig::GRID_OPTIONS_FIELD => 'exampleId'
+                    ],
+                    [
+                        ViewConfig::GRID_OPTIONS_FIELD             => 'name',
+                        ViewConfig::GRID_OPTIONS_HEADER_CELL_CLASS => 'blue'
+                    ],
                 ],
             ]
         ];

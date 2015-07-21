@@ -12,15 +12,6 @@ abstract class CrudController extends AbstractActionController
 {
     use ControllerTrait;
     
-    const VIEW_CONFIG_TITLE = 'title';
-    const VIEW_CONFIG_GET_ITEMS_URL = 'getItemsUrl';
-    const VIEW_CONFIG_CREATE_URL = 'createUrl';
-    const VIEW_CONFIG_STATE = 'state';
-    const VIEW_CONFIG_STATE_OTHERWISE_URL = 'otherwiseUrl';
-    const VIEW_CONFIG_STATE_ROUTES = 'routes';
-    const VIEW_CONFIG_ITEMS = 'items';
-    const VIEW_CONFIG_GRID_OPTIONS = 'gridOptions';
-    
     const ACTION_CREATE = 'create';
     const ACTION_UPDATE = 'update';
     const ACTION_DELETE = 'delete';

@@ -20,40 +20,46 @@ class ExampleController extends CrudController
     {
         $this->entityClass = 'Admin\Entity\Example';
         $this->viewConfig = [
-            ViewConfig::TITLE         => 'Example',
-            ViewConfig::GET_ITEMS_URL => '/admin/example/search',
-            ViewConfig::CREATE_URL    => 'create',
-            ViewConfig::STATE         => [
-                ViewConfig::STATE_OTHERWISE_URL => '/',
-                ViewConfig::STATE_ROUTES        => [
+            'title'       => 'Example',
+            'getItemsUrl' => '/admin/example/search',
+            'createUrl'   => 'create',
+            'state'       => [
+                'otherwiseUrl' => '/',
+                'routes'       => [
                     'index' => [
-                        ViewConfig::STATE_ROUTES_URL          => "/",
-                        ViewConfig::STATE_ROUTES_TEMPLATE_URL => '/assets/views/grid.html'
+                        'url'         => "/",
+                        'templateUrl' => '/assets/views/grid.html'
                     ],
                     'create' => [
-                        ViewConfig::STATE_ROUTES_URL          => "/create",
-                        ViewConfig::STATE_ROUTES_TEMPLATE_URL => 'create'
+                        'url'         => "/create",
+                        'templateUrl' => 'create'
+                    ],
+                    'view' => [
+                        'url'         => "/:exampleId/view",
+                        'template' => '<div ng-include="getTemplateUrl()"></div>',
+                        'controller' => 'editController'
                     ],
                     'edit' => [
-                        ViewConfig::STATE_ROUTES_URL          => "/edit",
-                        ViewConfig::STATE_ROUTES_TEMPLATE_URL => 'create'
+                        'url'         => "/:exampleId/edit",
+                        'template' => '<div ng-include="getTemplateUrl()"></div>',
+                        'controller' => 'editController'
                     ],
                 ]
             ],
             
-            ViewConfig::GRID_OPTIONS => [
-                ViewConfig::GRID_OPTIONS_COLUMN_DEFS => [
+            'gridOptions' => [
+                'columnDefs' => [
                     [
-                        ViewConfig::GRID_OPTIONS_NAME => 'ID',
-                        ViewConfig::GRID_OPTIONS_FIELD => 'exampleId'
+                        'name'  => 'ID',
+                        'field' => 'exampleId'
                     ],
                     [
-                        ViewConfig::GRID_OPTIONS_FIELD             => 'name',
-                        ViewConfig::GRID_OPTIONS_HEADER_CELL_CLASS => 'blue'
+                        'field'           => 'name',
+                        'headerCellClass' => 'blue'
                     ],
                     [
-                        ViewConfig::GRID_OPTIONS_FIELD             => 'actionLinks',
-                        'cellTemplate' => '<a href="#/edit">edit</a>'
+                        'field'        => 'actionLinks',
+                        'cellTemplate' => '<a class="btn btn-primary" ui-sref="view({id:example._id})">View</a>'
                     ],
                 ],
             ],

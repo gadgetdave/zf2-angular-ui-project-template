@@ -26,4 +26,14 @@ app
         $scope.title = CrudControllerService.getTitle();
     }
 );
+app
+.controller(
+    "editController",
+    function($scope, CrudControllerService, $state) {
+        
+        $scope.getTemplateUrl = function () {
+            return '/admin/example/' + $state.params.exampleId + '/edit';
+        };
+    }
+);
 

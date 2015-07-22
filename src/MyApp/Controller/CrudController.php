@@ -201,9 +201,14 @@ abstract class CrudController extends AbstractActionController
         
     }
     
+    public function editAction()
+    {
+        return $this->updateAction();
+    }
+    
     public function updateAction()
     {
-        
+        return $this->createAction();
     }
     
     public function deleteAction()

@@ -54,7 +54,7 @@ return array(
             'admin_example' => [
                  'type'=> 'segment',
                  'options' => [
-                     'route' => '/admin/example[/][:action[/]][:exampleId[/]]',
+                     'route' => '/admin/example[/][:exampleId[/]][:action[/]]',
                      'constraints' => [
                          'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                          'userId' => '[0-9]+',

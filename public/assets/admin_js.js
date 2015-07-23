@@ -7,7 +7,9 @@ var app = angular.module(
         'ui.router',
         'ui.grid',
         'ngTable',
-        'angular-loading-bar'
+        'angular-loading-bar',
+        'ngResource',
+        'myApp.services'
     ]
 )
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -28,6 +30,14 @@ var app = angular.module(
         }
     }
 });
+
+angular.module('myApp.services', []).factory('Example', function($resource) {
+    return $resource('/admin/example/:exampleId', { id: '@_exampleId' }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  });
 //add service to angular app
 app.service('Model', SpaceName.Model);
 app.service('ControllerService', SpaceName.ControllerService);
@@ -63,14 +73,19 @@ app
 app
 .controller(
     "editController",
-    function($scope, CrudControllerService, $state) {
-        
-        $scope.getTemplateUrl = function () {
-            return '/admin/example/' + $state.params.exampleId + '/edit';
+    function($scope, $state, $stateParams, Example) {
+        $scope.updateExample = function() { //Update the edited movie. Issues a PUT to /api/movies/:id
+          $scope.example.$update(function() {
+            $state.go('index'); // on success go back to home i.e. movies state.
+          });
         };
-    }
-);
-
+       
+        $scope.loadExample = function() { //Issues a GET request to /api/movies/:id to get a movie to update
+          $scope.example = Example.get({ exampleId: $stateParams.exampleId });
+        };
+       
+        $scope.loadExample(); // Load a movie which can be edited on UI
+      });
 
 'use strict';
 

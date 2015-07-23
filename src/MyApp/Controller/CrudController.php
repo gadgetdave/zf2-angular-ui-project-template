@@ -7,8 +7,9 @@ use Zend\View\Model\JsonModel;
 use Doctrine\ORM\EntityManager;
 use Zend\Form\Form;
 use Zend\Form\Element\Checkbox;
+use Zend\Mvc\Controller\AbstractRestfulController;
 
-abstract class CrudController extends AbstractActionController
+abstract class CrudController extends AbstractController
 {
     use ControllerTrait;
     
@@ -198,7 +199,28 @@ abstract class CrudController extends AbstractActionController
     
     public function viewAction()
     {
+        $repository = $this->getEntityManager()->getRepository(
+            $this->entityClass
+        );
         
+        $entity = $repository->findOneBy(['exampleId' => $this->getEvent()->getRouteMatch()->getParam('exampleId')]);
+
+        $response = [];
+        if (!empty($entity)) {
+            $response = $entity->toArray();
+        }
+
+        return new JsonModel($response);
+        die;
+        dd();
+        $items = [];
+        foreach ($repository->findAll() as $row) {
+            $items[] = $row->toArray();
+        }
+        
+        $this->viewConfig[ViewConfig::ITEMS] = $items;
+        
+        return $this->returnNgView();
     }
     
     public function editAction()

@@ -7,7 +7,9 @@ var app = angular.module(
         'ui.router',
         'ui.grid',
         'ngTable',
-        'angular-loading-bar'
+        'angular-loading-bar',
+        'ngResource',
+        'myApp.services'
     ]
 )
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -28,3 +30,11 @@ var app = angular.module(
         }
     }
 });
+
+angular.module('myApp.services', []).factory('Example', function($resource) {
+    return $resource('/admin/example/:exampleId', { id: '@_exampleId' }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  });

@@ -29,11 +29,16 @@ app
 app
 .controller(
     "editController",
-    function($scope, CrudControllerService, $state) {
-        
-        $scope.getTemplateUrl = function () {
-            return '/admin/example/' + $state.params.exampleId + '/edit';
+    function($scope, $state, $stateParams, Example) {
+        $scope.updateExample = function() { //Update the edited movie. Issues a PUT to /api/movies/:id
+          $scope.example.$update(function() {
+            $state.go('index'); // on success go back to home i.e. movies state.
+          });
         };
-    }
-);
-
+       
+        $scope.loadExample = function() { //Issues a GET request to /api/movies/:id to get a movie to update
+          $scope.example = Example.get({ exampleId: $stateParams.exampleId });
+        };
+       
+        $scope.loadExample(); // Load a movie which can be edited on UI
+      });

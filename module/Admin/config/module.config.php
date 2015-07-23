@@ -50,21 +50,46 @@ return array(
                     ),
                 ), */
             ),
-            
+            /* 'album' => array(
+                            'type'    => 'segment',
+                            'options' => array(
+                                            'route'    => '/album[/:id]',
+                                            'constraints' => array(
+                                                            'id'     => '[0-9]+',
+                                            ),
+                                            'defaults' => array(
+                                                            'controller' => 'AlbumApi\Controller\Album',
+                                            ),
+                            ),
+            ), */
             'admin_example' => [
                  'type'=> 'segment',
                  'options' => [
-                     'route' => '/admin/example[/][:exampleId[/]][:action[/]]',
+                     'route' => '/admin/example[/:exampleId]',
                      'constraints' => [
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                         'userId' => '[0-9]+',
+                         'exampleId' => '[0-9]+',
                      ],
                      'defaults' => [
                          'controller' => 'Admin\Controller\Example',
-                         'action' => 'index',
+//                          'action' => 'index',
                      ],
                  ],
              ],
+             /* 'admin_example_view' => [
+                 'type'=> 'segment',
+                 'options' => [
+                     'route' => '/admin/example/:exampleId',
+                     'constraints' => [
+                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'exampleId' => '[0-9]+',
+                     ],
+                     'defaults' => [
+                         'controller' => 'Admin\Controller\Example',
+                         'action' => 'view',
+                     ],
+                 ],
+             ], */
+
         ),
     ),
     'service_manager' => array(
@@ -171,11 +196,11 @@ return array(
           'cache' => 'array',
           'paths' => array(__DIR__ . '/../src/Admin/Entity')
         ),
-    
+
         'orm_default' => array(
           'drivers' => array(
             'Admin\Entity' => 'application_entities'
           )
     )))
-    
+
 );

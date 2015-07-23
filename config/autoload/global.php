@@ -85,6 +85,7 @@ return array(
                     'base_views' => array(
                         'assets' => array(
                             'views/*.html',
+                            'views/partials/*.html'
                         ),
                         'options' => array(
                             'move_raw' => true,

@@ -38,6 +38,7 @@
         echo $this->plugin('HeadLink');
 
         $this->headScript()
+            ->prependFile($this->basePath('bower_components/angular-resource/angular-resource.js'))
             ->prependFile($this->basePath('bower_components/angular-loading-bar/src/loading-bar.js'))
             ->prependFile($this->basePath('bower_components/angular-ui-grid/ui-grid.js'))
             ->prependFile($this->basePath('bower_components/ng-table/dist/ng-table.js'))

@@ -89,4 +89,15 @@ class Example
         $this->name = $name;
         return $this;
     }
+
+    public function hydrateProperties(array $properties = [])
+    {
+        foreach ($properties as $key => $value) {
+            if (method_exists($this, 'set' . $key)) {
+                $this->{'set' . $key}($value);
+            }
+        }
+
+        return $this;
+    }
 }

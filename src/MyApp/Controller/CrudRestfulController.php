@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Zend\Form\Form;
 use Zend\Form\Element\Checkbox;
 use Zend\Mvc\Controller\AbstractRestfulController;
+use Doctrine\ORM\Query;
 
 abstract class CrudRestfulController extends AbstractRestfulController
 {
@@ -94,13 +95,11 @@ abstract class CrudRestfulController extends AbstractRestfulController
     public function get($id)
     {
         // Action used for GET requests with resource Id
-        $em = $this->getEntityManager();
+        $repository = $this->getEntityManager()->getRepository($this->entityClass);
 
-        $entity = $em->find($this->entityClass, $id);
-dd($entity);
         $entity = $repository->findOneBy([$this->identifierName => $id]);
-        dd($entity);die;
-        return new JsonModel(['data' => $entity]);
+
+        return new JsonModel(['data' => $entity->toArray()]);
     }
 
     /**
@@ -120,14 +119,14 @@ dd($entity);
     public function update($id, $data)
     {
         // Action used for GET requests with resource Id
-        $repository = $this->getEntityManager()->getRepository(
-            $this->entityClass
-        );
+        $em = $this->getEntityManager();
 
-        $entity = $repository->findOneBy([$this->identifierName => $id]);
+        $entity = $em->find($this->entityClass, $id)->hydrateProperties($data);
 
-        // Action used for PUT requests
-        return new JsonModel(array('data' => array('id'=> 3, 'name' => 'Updated Album', 'band' => 'Updated Band')));
+        $em->persist($entity);
+        $em->flush();
+
+        return new JsonModel(['data' => $entity->toArray()]);
     }
 
     /**
